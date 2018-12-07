@@ -6,13 +6,15 @@ import { users } from './users.reducer';
 import { alert } from './alert.reducer';
 import { initial } from './initial.reducer';
 import { ui } from './ui.reducer';
+import { otp } from './otp.reducer';
 
 const rootReducer = combineReducers({
   authentication,
   registration,
   users,
   alert,
-  initial
+  initial,
+  otp
 });
 
 export default rootReducer;

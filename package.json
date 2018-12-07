@@ -1,9 +1,9 @@
 {
-  "name": "react-redux-registration-login-example",
+  "name": "Neusis",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cornflourblue/react-redux-registration-login-example.git"
+    "url": ""
   },
   "license": "MIT",
   "scripts": {
@@ -11,17 +11,23 @@
     "build": "webpack -p"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.8",
+    "@fortawesome/free-brands-svg-icons": "^5.5.0",
+    "@fortawesome/free-solid-svg-icons": "^5.5.0",
+    "@fortawesome/react-fontawesome": "^0.1.3",
     "css-loader": "^1.0.1",
     "history": "^4.6.3",
     "node-sass": "^4.10.0",
     "react": "^16.0.0",
     "react-desktop": "^0.3.7",
     "react-dom": "^16.0.0",
+    "react-otp-input": "^0.2.1",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.2",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "style-loader": "^0.23.1"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",

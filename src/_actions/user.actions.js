@@ -2,10 +2,12 @@ import { userConstants } from '../_constants';
 import { userService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
+import config from 'config';
 
 export const userActions = {
     login,
     logout,
+    sendOtp,
     register,
     getAll,
     delete: _delete
@@ -17,9 +19,9 @@ function login(username, password) {
 
         userService.login(username, password)
             .then(
-                user => { 
+                user => {
+                    history.push('/dashboard'); 
                     dispatch(success(user));
-                    history.push('/');
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -32,6 +34,31 @@ function login(username, password) {
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
+function sendOtp(phone) {
+    return dispatch => {
+        // dispatch(request({ phone }));
+
+        userService.sendOtp(phone)
+            .then(
+                user => {
+                    // history.push('/dashboard');
+                    alert(JSON.stringify(user)); 
+                    dispatch(success(user));
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
+                }
+            );
+    };
+
+    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
+    function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
+}
+
+
+
 
 function logout() {
     userService.logout();

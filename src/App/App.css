@@ -1,0 +1,11 @@
+.common-icon {
+	z-index: 9999;
+	position: absolute;
+    left: 12px;
+    font-size: 25px;
+    color: #729dc8;
+}
+
+.ml-10 {
+	margin-left: 10px;
+}

@@ -3,6 +3,17 @@ import { Router, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import config from 'config';
 
+
+//  font awesome configuration 
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fab, faCheckSquare, faCoffee);
+
+//  font awesome configuration 
+
 import { history } from '../_helpers';
 import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_components';
@@ -11,6 +22,7 @@ import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
 import MainComponent from './MainContainer/MainContainer';
 import SideBar from '../SideBar/SideBar';
+import  './App.css';
 
 const Header = (props) => (
     <div> 
@@ -21,6 +33,29 @@ const Header = (props) => (
     </div>
 );
     
+const RouterItems = [
+    {
+        name: 'Login Page',
+        path: '/login',
+        component: LoginPage
+    },
+    {
+        name: 'Dashboard',
+        path: '/dashboard',
+        component: SideBar
+    },
+    {
+        name: 'Home Page',
+        path: '/',
+        component: HomePage
+    },
+    {
+        name: 'Register',
+        path: '/register',
+        component: RegisterPage
+    }
+]
+
 class App extends React.Component {
     constructor(props) {
         console.log(config.apiUrl)
@@ -34,14 +69,33 @@ class App extends React.Component {
     }
 
     render() {
-        const { alert } = this.props;
+        const { alert, loggedIn, otpStatus } = this.props;
         return (        
 
             <div className="jumbotron text-center">
+                 
                  <Router history={history}>
-                        
-                        <SideBar />
-
+                        <div> 
+                            {
+                                otpStatus === 'verified' ? 
+                                    <div> 
+                                          <Header /> 
+                                            {
+                                                RouterItems.map(data=> (
+                                                    <Route key={data.name} path={data.path} component={data.component} />    
+                                                ))
+                                            }   
+                                           <footer>
+                                                <p>Posted by: Hege Refsnes</p>
+                                                <p>Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.</p>
+                                            </footer>                       
+                                    </div>
+                                    : 
+                                    <div>
+                                        <LoginPage />
+                                    </div> 
+                            }   
+                        </div>
                 </Router>
             </div>
         );
@@ -50,8 +104,13 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
     const { alert } = state;
+    const { authentication } = state;
+    const { otpStatus } = state.otp;
+    console.log(authentication);
     return {
-        alert
+        alert,
+        otpStatus,
+        loggedIn: authentication.loggedIn
     };
 }
 

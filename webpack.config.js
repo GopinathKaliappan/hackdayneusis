@@ -7,6 +7,7 @@ module.exports = {
         path: path.resolve('dist'),
         filename: 'bundle.js'
     },
+    devtool: 'inline-source-map',
     resolve: {
         extensions: ['.js', '.jsx']
     },
@@ -17,13 +18,11 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react', 'es2015', 'stage-3']
+                    presets: ['es2015', 'react', 'stage-3']
                 }
-            },
-            {
-               test: /\.scss$/,
-                loader: 'style!css!sass'
-            }
+            }, 
+            { test: /\.css$/, loader: "style-loader!css-loader" }
+
         ]
     },
     plugins: [new HtmlWebpackPlugin({

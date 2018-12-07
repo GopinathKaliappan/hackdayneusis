@@ -4,6 +4,7 @@ import { authHeader } from '../_helpers';
 export const userService = {
     login,
     logout,
+    sendOtp,
     register,
     getAll,
     getById,
@@ -20,7 +21,7 @@ function login(username, password) {
     let user = { firstName: username, lastName: 'Kaliappan',  username: username, password: password, token: '54asdasdsadsad' };
     // return user;
 
-       return fetch(`https://jsonplaceholder.typicode.com/todos/1`)
+       return fetch(`https://reqres.in/api/users/2`)
        //return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
         .then(handleResponse)
         .then(users => {
@@ -30,7 +31,33 @@ function login(username, password) {
             localStorage.setItem('user', JSON.stringify(user));
             
             // }
+            let otp = '1234';
+            return otp;
+        });
 
+         // return user;
+}
+function sendOtp(phone) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone })
+    };
+    let user = { phone: phone, lastName: 'Kaliappan',  username: phone, password: '', token: '54asdasdsadsad' };
+    // return user;
+
+       return fetch(`https://jsonplaceholder.typicode.com/todos/1`)
+       //return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+        .then(handleResponse)
+        .then(users => {
+            // console.log('JSON.stringify(users)');
+            console.log(users);
+            user = { ...user, ...users };            
+            localStorage.setItem('user', JSON.stringify(user));
+            config.otp = '1234';
+
+            // }
+                
             return user;
         });
 
